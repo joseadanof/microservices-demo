@@ -29,7 +29,7 @@ COPY package*.json ./
 
 RUN npm install --only=production
 
-RUN npm install --save epsagon
+RUN npm install epsagon-frameworks
 
 FROM base
 
@@ -38,6 +38,12 @@ RUN GRPC_HEALTH_PROBE_VERSION=v0.2.0 && \
     chmod +x /bin/grpc_health_probe
 
 WORKDIR /usr/src/app
+
+ENV NODE_OPTIONS --require=epsagon-frameworks
+ENV EPSAGON_TOKEN a353f9bd-be48-4898-b16a-0ee277d5765e
+ENV EPSAGON_APP_NAME paymentservice
+ENV EPSAGON_DEBUG true
+ENV EPSAGON_SEND_TIMEOUT_SEC 2.0
 
 COPY --from=builder /usr/src/app/node_modules ./node_modules
 
