@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM node:8-alpine as base
+FROM node:12-alpine as base
 
 FROM base as builder
 
@@ -28,6 +28,8 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 RUN npm install --only=production
+
+RUN npm install --save epsagon
 
 FROM base
 

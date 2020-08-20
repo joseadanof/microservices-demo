@@ -39,3 +39,17 @@ const PROTO_PATH = path.join(__dirname, '/proto/');
 const server = new HipsterShopServer(PROTO_PATH, PORT);
 
 server.listen();
+
+const epsagon = require('epsagon');
+
+epsagon.init({
+  token: 'a353f9bd-be48-4898-b16a-0ee277d5765e',
+  appName: 'Epsagon Application',
+  metadataOnly: false, // Optional, send more trace data
+});
+
+const main = epsagon.nodeWrapper(() => {
+  return 'Hello World!';
+});
+
+main();
